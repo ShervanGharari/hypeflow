@@ -1,7 +1,0 @@
-/home/shg096/FHIMP/virtual_env/fhimp_venv/lib/python3.10/site-packages/easymore/remapper.py:512: UserWarning: Column names longer than 10 characters will be truncated when saved to ESRI Shapefile.
-  shp_int.to_file(self.temp_dir+self.case_name+'_intersected_shapefile.shp') # save the intersected files
-/home/shg096/FHIMP/virtual_env/fhimp_venv/lib/python3.10/site-packages/easymore/remapper.py:549: PendingDeprecationWarning: dropping variables using `drop` will be deprecated; using drop_vars is encouraged.
-  aatr = attr.drop('index')
-/cvmfs/soft.computecanada.ca/easybuild/software/2020/avx2/Compiler/gcc9/eccodes/2.25.0/lib/python3.10/site-packages/cfgrib-0.9.10.1-py3.10.egg/cfgrib/xarray_plugin.py:11: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
-/home/shg096/FHIMP/virtual_env/fhimp_venv/lib/python3.10/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
-  other = LooseVersion(other)
