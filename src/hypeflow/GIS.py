@@ -4,12 +4,16 @@ Common functions for manupulating the gis outfput from other sources
 
 import pandas as pd
 import numpy as np
-from typing import Dict, Union
+from typing import Dict, Union, List
 from itertools import product
 import sys
+import xarray as xr
 
 
 class tinyGIS:
+    
+    def __init__(self) -> None:
+        print('tinyGIS initiated')
 
     def manipulating_fractions (self,
                                 df,
@@ -93,11 +97,12 @@ class tinyGIS:
             df_mappings = {}
 
         # Loop through each DataFrame
-        for idx, df in enumerate(dfs, start=1):
-            mapping = df_mappings.get(f'df{idx}', {})
+        for idx, df in enumerate(dfs):
+            
+            mapping = df_mappings.get(f'df{idx+1}', {})
             ID = mapping.get('id')
             prefix = mapping.get('prefix', '')
-            data_name = mapping.get('data_name', f'Data_{idx}')
+            data_name = mapping.get('data_name', f'Data_{idx+1}')
 
             # Set the ID column to index for the DataFrame
             if ID is not None:
@@ -114,7 +119,7 @@ class tinyGIS:
                 df = df.drop(columns=[col])
 
             # update the dataframe
-            dfs[idx - 1] = df
+            dfs[idx] = df
 
         # Compare the indexes
         index_comparison = all(dfs[i].index.equals(dfs[i + 1].index) for i in range(len(dfs) - 1))
@@ -170,4 +175,15 @@ class tinyGIS:
             new_col_name = f'comb_{i:04d}'  # Using f-string to format column names
             result.rename(columns={col: new_col_name}, inplace=True)
 
-        return result , report
+        # convert report to xarray
+        total_ds = report.to_xarray()        
+        total_ds = total_ds.drop_vars(['index'])
+        total_ds = total_ds.swap_dims({'index':'comb'})
+        
+        # add other variables to this
+        total_ds['fraction'] = xr.DataArray(result.values, dims=('id', 'comb'))
+        total_ds['comb'] = xr.DataArray(result.columns, dims=('comb'))
+        total_ds['id'] = xr.DataArray(result.index, dims=('id'))
+        
+        # return
+        return result , report, total_ds
