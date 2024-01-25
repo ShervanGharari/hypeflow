@@ -83,6 +83,23 @@ class tinyGIS:
 
         # return
         return df_modified
+    
+    def report_max_frac(self,
+                        df,
+                        df_mapping: Dict[str, str] = {'prefix': 'frac_'}):
+        
+        # Create a copy of the DataFrame to avoid modifying the original
+        df_copy = df.copy()
+
+        # Get the column name with the maximum value for each row only for columns starting with 'fract_'
+        fract_columns = df_copy.filter(like=df_mapping.get('prefix'))
+        max_column = fract_columns.idxmax(axis=1)
+
+        # Add the result as a new column to the copied DataFrame
+        df_copy['majority'] = max_column
+        df_copy['majority'] = df_copy['majority'].str.replace(df_mapping.get('prefix'), '')
+        return df_copy
+        
 
     def intersect_df(self,
                      *dfs: pd.DataFrame,
@@ -178,12 +195,12 @@ class tinyGIS:
         # convert report to xarray
         total_ds = report.to_xarray()        
         total_ds = total_ds.drop_vars(['index'])
-        total_ds = total_ds.swap_dims({'index':'comb'})
+        total_ds = total_ds.swap_dims({'index':'m'})
         
         # add other variables to this
-        total_ds['fraction'] = xr.DataArray(result.values, dims=('id', 'comb'))
-        total_ds['comb'] = xr.DataArray(result.columns, dims=('comb'))
-        total_ds['id'] = xr.DataArray(result.index, dims=('id'))
+        total_ds['fraction'] = xr.DataArray(result.values, dims=('n', 'm'))
+        total_ds['comb'] = xr.DataArray(result.columns, dims=('m'))
+        total_ds['id'] = xr.DataArray(result.index, dims=('n'))
         
         # return
         return result , report, total_ds
