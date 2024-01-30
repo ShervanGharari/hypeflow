@@ -46,6 +46,7 @@ class tinyGIS:
         # find global maximume column
         df_sum = df.sum(axis=0)
         all_max_column = df_sum[prefix_cols].idxmax()
+        print(all_max_column)
 
         # iterate over the row for each case of majority or normalize
         if action.lower() == 'majority':
