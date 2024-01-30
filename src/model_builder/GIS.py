@@ -22,6 +22,8 @@ class tinyGIS:
                                 pass_maximum_fract_to_zero_rows = True,
                                 minimum_value = 0):
 
+        import copy
+        df = copy.deepcopy(df)
         # Set the ID column to index for the DataFrame
         ID = df_mapping.get('id')
         if ID is not None:
@@ -79,10 +81,10 @@ class tinyGIS:
         else:
             sys.exit('action is not majority or normalize')
 
-        df_modified = df.copy()
+        # df_modified = df.copy()
 
         # return
-        return df_modified
+        return df
     
     def report_max_frac(self,
                         df,
