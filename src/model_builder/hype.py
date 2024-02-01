@@ -207,7 +207,7 @@ class HYPEWorkflow(object):
 
         # soil type
         if soil_type.lower() == 'usda':
-            print('inside soil')
+            #print('inside soil')
             from .HYPE_default_dict import USDA
             #print(USDA)
             # write general
@@ -216,7 +216,7 @@ class HYPEWorkflow(object):
 
         # land cover
         if land_cover_type.lower() == 'cec':
-            print('inside alnd cover')
+            #print('inside land cover')
             from .HYPE_default_dict import CEC
             #print(CEC)
             # write general

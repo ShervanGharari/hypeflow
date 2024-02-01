@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "hypeflow"
+name = "model_builder"
 dynamic = ["version"]
 description = 'Commons tools for the HYPE model input file in Python'
 readme = "README.md"
@@ -31,12 +31,12 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/ShervanGharari/hypeflow#readme"
-Issues = "https://github.com/ShervanGharari/hypeflow/issues"
-Source = "https://github.com/ShervanGharari/hypeflow"
+Documentation = "https://github.com/ShervanGharari/model_builder#readme"
+Issues = "https://github.com/ShervanGharari/model_builder/issues"
+Source = "https://github.com/ShervanGharari/model_builder"
 
 [tool.hatch.version]
-path = "src/hypeflow/__init__.py"
+path = "src/model_builder/__init__.py"
 
 [tool.hatch.envs.default]
 dependencies = [
@@ -66,7 +66,7 @@ dependencies = [
   "ruff>=0.0.243",
 ]
 [tool.hatch.envs.lint.scripts]
-typing = "mypy --install-types --non-interactive {args:src/hypeflow tests}"
+typing = "mypy --install-types --non-interactive {args:src/model_builder tests}"
 style = [
   "ruff {args:.}",
   "black --check --diff {args:.}",
@@ -132,7 +132,7 @@ unfixable = [
 ]
 
 [tool.ruff.isort]
-known-first-party = ["hypeflow"]
+known-first-party = ["model_builder"]
 
 [tool.ruff.flake8-tidy-imports]
 ban-relative-imports = "all"
@@ -142,16 +142,16 @@ ban-relative-imports = "all"
 "tests/**/*" = ["PLR2004", "S101", "TID252"]
 
 [tool.coverage.run]
-source_pkgs = ["hypeflow", "tests"]
+source_pkgs = ["model_builder", "tests"]
 branch = true
 parallel = true
 omit = [
-  "src/hypeflow/__about__.py",
+  "src/model_builder/__about__.py",
 ]
 
 [tool.coverage.paths]
-hypeflow = ["src/hypeflow", "*/hypeflow/src/hypeflow"]
-tests = ["tests", "*/hypeflow/tests"]
+model_builder = ["src/model_builder", "*/model_builder/src/model_builder"]
+tests = ["tests", "*/model_builder/tests"]
 
 [tool.coverage.report]
 exclude_lines = [
@@ -170,4 +170,4 @@ exclude = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/hypeflow"]
+packages = ["src/model_builder"]
