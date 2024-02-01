@@ -22,10 +22,9 @@ del _hard_dependencies, _dep, _missing_dependencies
 
 # docstring using numpy style
 __doc__ = """
-hypeflow
+model_builder
 ==================================
 
-**hypeflow** a collection of codes to make to set up the GeoClass, GeoData, and parameter file
-for HYPE model based on processed GIS codes.
+**model_builder** a collection of codes to make to set up various file system for HYPE, MESH and SUMMA model.
 """
 
